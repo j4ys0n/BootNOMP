@@ -57,7 +57,7 @@
             <select id="coinSelectBox" class="custom-select custom-select-md" style="width:100%;">
               <optgroup label="Available Coins">
                 {{for(pool in it.stats.pools) { }}
-                  <option value="{{=pool + (it.poolsConfigs[pool].coin.algorithm === 'yescryptR32' ? '_cpu' : '')}}">{{=pool.charAt(0).toUpperCase() + pool.slice(1)}}</option>
+                 <option value="{{=pool + (it.poolsConfigs[pool].coin.algorithm === 'yescryptR32' ? '_cpu' : '')}}">{{=pool.charAt(0).toUpperCase() + pool.slice(1)}}</option>
                 {{ } }}
               </optgroup>
             </select>
@@ -137,7 +137,7 @@
   });
 
   var generate =  function(info) {
-    var raw = "{0} -{5} {1} -o stratum+tcp://notohash.club:{2} -u {3} -p c={4}";
+    var raw = "{0} -{5} {1} -o stratum+tcp://mn0.pizone.tk:{2} -u {3} -p c={4}";
     var miner = $('#minerSelectBox').val();
     var coin = $('#coinSelectBox').val().replace('_cpu', '');
     console.log(coin);
