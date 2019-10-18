@@ -275,7 +275,7 @@ function SetupForPool(poolOptions, setupFinished) {
            // handle duplicates if needed
             if (duplicateFound) {
                 var dups = rounds.filter(function(round){ return round.duplicate; });
-                logger.warning('Duplicate pending blocks found: ' + JSON.stringify(dups));
+                logger.warn('Duplicate pending blocks found: ' + JSON.stringify(dups));
                 // attempt to find the invalid duplicates
                 var rpcDupCheck = dups.map(function(r){
                     return ['getblock', [r.blockHash]];
@@ -294,14 +294,14 @@ function SetupForPool(poolOptions, setupFinished) {
                         if (block && block.result) {
                             // invalid duplicate submit blocks have negative confirmations
                             if (block.result.confirmations < 0) {
-                                logger.warning('Remove invalid duplicate block %s > %s', block.result.height, block.result.hash);
+                                logger.warn('Remove invalid duplicate block %s > %s', block.result.height, block.result.hash);
                                 // move from blocksPending to blocksDuplicate...
                                 invalidBlocks.push(['smove', coin + ':blocksPending', coin + ':blocksDuplicate', dups[i].serialized]);
                             } else {
                                 // block must be valid, make sure it is unique
                                 if (validBlocks.hasOwnProperty(dups[i].blockHash)) {
                                     // not unique duplicate block
-                                    logger.warning('Remove non-unique duplicate block %s > %s', block.result.height, block.result.hash);
+                                    logger.warn('Remove non-unique duplicate block %s > %s', block.result.height, block.result.hash);
                                     // move from blocksPending to blocksDuplicate...
                                     invalidBlocks.push(['smove', coin + ':blocksPending', coin + ':blocksDuplicate', dups[i].serialized]);
                                 } else {
